@@ -10,8 +10,6 @@ SIZE = 1024
 class Client:
     cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # dice que vamos a usar TCP, no se preocupa si recibe o mando
 
-  
-
     def __init__(self):
         print("Starting")
         
@@ -21,10 +19,10 @@ class Client:
         return message
 
     def startConnection(self):
-        self.cliente.connect(ADDR)
-        self.cliente.send("images.jpg".encode(FORMAT))
+        self.cliente.connect(('192.168.56.1',PORT))
+        self.cliente.send("prueba.txt".encode(FORMAT))
         print(self.getServerMessage())
-        file = open("images.jpg")
+        file = open("prueba.txt")
         data = file.read()
         self.cliente.send(data.encode(FORMAT))
 
