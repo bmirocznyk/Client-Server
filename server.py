@@ -12,7 +12,7 @@ class Servidor:
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # dice que vamos a usar TCP, no se preocupa si recibe o mando
     server.bind((ADDR))# ip empty para que escuche otras requests de otras compus
     server.listen()
-
+    print(IP)
     def __init__(self):
        
         print("Listening")
@@ -21,8 +21,9 @@ class Servidor:
         return fileName=='0'
   
     def acceptFileConfirmation(self, fileName):
-        print(f"Desea usted aceptar el archivo{fileName} escriba Si o No")
-        return input().upper =="SI"
+        print(f"Desea usted aceptar el archivo{fileName} escriba si o No")
+        response = input()
+        return response == 'si'
 
     def recieveFile(self,fileName,connection):
         connection.send(f"Comenzando transferencia de {fileName}".encode())
@@ -38,7 +39,7 @@ class Servidor:
                 print("El cliente no encotró el archivo y canceló la conexión")
                 connection.send("Hasta la proxima, esperamos que encuentre el archivo".encode())
         else:
-            if(self.acceptFileConfirmation):
+            if(self.acceptFileConfirmation(fileName)):
                 self.recieveFile(fileName,connection)
                 connection.send(f"Muchas gracias por la transferencia de{fileName}".encode())
             else:
