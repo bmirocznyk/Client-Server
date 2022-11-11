@@ -2,19 +2,20 @@
 import socket
 import sys
 
-IP = socket.gethostbyname(socket.gethostname())
+
 PORT =8121
-ADDR = (IP, PORT)
+
 SIZE = 1024
 FORMAT = "utf-8"
 
 class Servidor:
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # dice que vamos a usar TCP, no se preocupa si recibe o mando
-    server.bind((ADDR))# ip empty para que escuche otras requests de otras compus
-    server.listen()
-    print(IP)
-    def __init__(self):
-       
+
+    def __init__(self,port):
+        ip = socket.gethostbyname(socket.gethostname())
+        address = (ip, port)
+        self.server.bind((address))# ip empty para que escuche otras requests de otras compus
+        self.server.listen()
         print("Listening")
 
     def hasClientCancelled(self, fileName):
@@ -59,9 +60,8 @@ class Servidor:
         
 
 def main():
-    servidor = Servidor()
+    servidor = Servidor(8121)
     servidor.startConnection()
     
 
 
-main()
