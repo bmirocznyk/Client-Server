@@ -1,6 +1,5 @@
 import socket
 from os.path import exists
-IP = socket.gethostbyname(socket.gethostname())
 PORT =8121
 ADDR = ("172.22.96.1", PORT)
 FORMAT ="utf-8"
@@ -12,9 +11,11 @@ class Client:
 
   
 
-    def __init__(self):
-        print("Starting")
-        
+    def __init__(self, port,ip):
+        adress = (ip,port)
+        self.cliente.connect(adress)
+        print(self.getServerMessage())
+        self.sendFileFlow()
 
     def getServerMessage(self):
         message=self.cliente.recv(SIZE).decode(FORMAT)
@@ -50,7 +51,7 @@ class Client:
         self.cliente.send(data.encode(FORMAT))
         
 
-    def sendFileFlow(self):
+    def sendFileFlow(self,path):
         fileName = self.selectFile()
         self.sendFileName(fileName)
         print(self.getServerMessage())
@@ -61,27 +62,5 @@ class Client:
         else:
             print("Se canceló la busqueda")
             
-            
-
-    def startConnection(self):
-        self.cliente.connect(ADDR)
-        print(self.getServerMessage())
-        self.sendFileFlow()
-
-        
-
-    def startMenu(self):
-        print("Seleccione 1 para enviar un archivo o 0 para cerrar la conexión")
-        choice = input()
-        if(choice=="1"):
-            self.startConnection()
-        elif (choice=="0"):
-            print("Hasta la proxima")
-
-def main():
-   
-    cliente = Client()
-    cliente.startMenu()
 
 
-main()

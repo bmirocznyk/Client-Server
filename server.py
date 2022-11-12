@@ -1,10 +1,5 @@
 
 import socket
-import sys
-
-
-PORT =8121
-
 SIZE = 1024
 FORMAT = "utf-8"
 
@@ -16,7 +11,7 @@ class Servidor:
         address = (ip, port)
         self.server.bind((address))# ip empty para que escuche otras requests de otras compus
         self.server.listen()
-        print("Listening")
+    
 
     def hasClientCancelled(self, fileName):
         return fileName=='0'

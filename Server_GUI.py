@@ -120,9 +120,9 @@ class Ui_MainWindow(object):
 
 
 def startServer():
-    print("pressed")
+    
     port = ui.portField.text()
-    if(port=="123123"):
+    if(port==""):
         print("Ingrese valor de puerto")
     else:
         sv = server.Servidor(int(port))
