@@ -150,12 +150,16 @@ class Ui_MainWindow(QDialog):
         if(not exists(filePath)):
             messageErrors += "El archivo no existe"
             hasErrors= True
+           
         if(hasErrors):
             error_dialog = QtWidgets.QMessageBox.about(self, "Errores", messageErrors)
         else:
-            cliente = client_lan.Client()
-            cliente.startConnection()
-
+            #try:
+                print(filePath)
+                cliente = client_lan.Client(port,ip,filePath)
+                cliente.sendFileFlow()
+            #except:
+              #  print("Fallo en la comunicación")
 
 if __name__ == "__main__":
     import sys
@@ -166,6 +170,8 @@ if __name__ == "__main__":
     MainWindow.setWindowTitle('Cliente')
     MainWindow.setWindowIcon(QIcon('C:/Users/Usuario/Pictures/clientIcon.png'))
     MainWindow.show()
+    ui.portField.setText("8001")
+    ui.ipField.setText("172.22.96.1")
     ui.connectButton.clicked.connect(ui.sendFile)
     sys.exit(app.exec_())
 

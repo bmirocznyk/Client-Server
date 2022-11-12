@@ -3,6 +3,8 @@ import socket
 SIZE = 1024
 FORMAT = "utf-8"
 
+import ntpath
+
 class Servidor:
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # dice que vamos a usar TCP, no se preocupa si recibe o mando
 
@@ -17,14 +19,15 @@ class Servidor:
         return fileName=='0'
   
     def acceptFileConfirmation(self, fileName):
-        print(f"Desea usted aceptar el archivo{fileName} escriba si o No")
-        response = input()
-        return response == 'si'
-
+        print(f"Desea usted aceptar el archivo{fileName} escriba si o No (Vemos si llegamos con popup)")
+        
+        return True
+    
     def recieveFile(self,fileName,connection):
         connection.send(f"Comenzando transferencia de {fileName}".encode())
         data = connection.recv(SIZE).decode(FORMAT)
-        with open(fileName, 'w') as file:    
+        print(data)
+        with open(fileName, 'a') as file:    
                 file.write(data)
                 file.close
 
@@ -44,7 +47,7 @@ class Servidor:
 
 
     def startConnection(self):
-        while True:
+        
             connection,address =self.server.accept()
             message = (f'Se conectó el adress:{address}')
             connection.send(message.encode())
