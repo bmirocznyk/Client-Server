@@ -19,17 +19,17 @@ class Servidor:
         return fileName=='0'
   
     def acceptFileConfirmation(self, fileName):
-        print(f"Desea usted aceptar el archivo{fileName} escriba si o No (Vemos si llegamos con popup)")
-        
+
+        #print(f"Desea usted aceptar el archivo{fileName} escriba si o No")  (Vemos si llegamos con popup)
         return True
     
     def recieveFile(self,fileName,connection):
         connection.send(f"Comenzando transferencia de {fileName}".encode())
         data = connection.recv(SIZE).decode(FORMAT)
-        print(data)
         with open(fileName, 'w') as file:    
                 file.write(data)
                 file.close
+        print(f"Se recibió el archivo{fileName} correctamente")
 
 
     def acceptMessageFlow(self,connection):
@@ -49,7 +49,7 @@ class Servidor:
     def startConnection(self):
         
             connection,address =self.server.accept()
-            message = (f'Se conectó el adress:{address}')
+            message = (f'Se conectó al adress:{address}')
             connection.send(message.encode())
             self.acceptMessageFlow(connection)
            
