@@ -27,7 +27,7 @@ class Servidor:
         connection.send(f"Comenzando transferencia de {fileName}".encode())
         data = connection.recv(SIZE).decode(FORMAT)
         print(data)
-        with open(fileName, 'a') as file:    
+        with open(fileName, 'w') as file:    
                 file.write(data)
                 file.close
 

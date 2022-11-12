@@ -1,5 +1,5 @@
 import socket
-from os.path import exists
+from os.path import exists, basename
 
 PORT =8121
 ADDR = ("172.22.96.1", PORT)
@@ -23,11 +23,10 @@ class Client:
 
 
     def sendFileName(self):
-        print(self.cFilePath)
-        self.cliente.send(self.cFilePath.encode(FORMAT))
+        fileName = basename(self.cFilePath)
+        self.cliente.send(fileName.encode(FORMAT))
     
     def sendFileData(self):
-        print(self.cFilePath)
         file = open(self.cFilePath)
         data = file.read()
         print(data)
