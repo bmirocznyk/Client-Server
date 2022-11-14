@@ -1,0 +1,21 @@
+User Test/Pre: test_gerente_general@toyota.com.ar
+Pass Test/Pre: 'cwx8>aB^43_>6#7
+
+u: nicolas.ousset@nttdata.com
+
+c: lV#%ffC1bjI3
+
+nicolas?
+Matias?
+
+
+ ag
+
+
+Desarrollo y pruebas unitarias
+Generación de casos de prueba
+Validación temprana
+Pruebas QA
+
+https://realpython.com/
+https://www.pythoncheatsheet.org/

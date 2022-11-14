@@ -6,12 +6,12 @@ FORMAT = "utf-8"
 import ntpath
 
 class Servidor:
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # dice que vamos a usar TCP, no se preocupa si recibe o mando
-
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+    
     def __init__(self,port):
         ip = socket.gethostbyname(socket.gethostname())
         address = (ip, port)
-        self.server.bind((address))# ip empty para que escuche otras requests de otras compus
+        self.server.bind((address))
         self.server.listen()
     
 
@@ -41,18 +41,18 @@ class Servidor:
             if(self.acceptFileConfirmation(fileName)):
                 self.recieveFile(fileName,connection)
                 connection.send(f"Muchas gracias por la transferencia de{fileName}".encode())
+                connection.close
             else:
                 connection.send(f"Decidimos rechazar el archivo{fileName}, disculpas".encode())
     
 
 
     def startConnection(self):
-        
-            connection,address =self.server.accept()
-            message = (f'Se conectó al adress:{address}')
-            connection.send(message.encode())
-            self.acceptMessageFlow(connection)
-           
+            while True:
+                connection,address =self.server.accept()
+                message = (f'Se conectó al adress:{address}')
+                connection.send(message.encode())
+                self.acceptMessageFlow(connection)
 
             
         

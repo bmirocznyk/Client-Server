@@ -1,21 +1,24 @@
 import socket
 from os.path import exists, basename
 
-PORT =8121
-ADDR = ("172.22.96.1", PORT)
 FORMAT ="utf-8"
 SIZE = 1024
 
 
 class Client:
-    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # dice que vamos a usar TCP, no se preocupa si recibe o mando
+    
+    cliente =""
     cFilePath=""
 
+    
     def __init__(self, port,ip,filePath):
+        self.cliente=cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         adress = (ip,int(port))
         self.cliente.connect(adress)
         print(self.getServerMessage())
         self.cFilePath=filePath
+    
+
 
     def getServerMessage(self):
         message=self.cliente.recv(SIZE).decode(FORMAT)
@@ -29,8 +32,8 @@ class Client:
     def sendFileData(self):
         file = open(self.cFilePath)
         data = file.read()
-        print(data)
         self.cliente.send(data.encode(FORMAT))
+    
         
         
 
@@ -41,6 +44,8 @@ class Client:
         self.sendFileData()
         print(self.getServerMessage())
         print("termino")
+        self.cliente.close()
+        
      
     
             

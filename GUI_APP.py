@@ -154,12 +154,14 @@ class Ui_MainWindow(QDialog):
         if(hasErrors):
             error_dialog = QtWidgets.QMessageBox.about(self, "Errores", messageErrors)
         else:
-            #try:
+            try:
                 print(filePath)
                 cliente = client_lan.Client(port,ip,filePath)
                 cliente.sendFileFlow()
-            #except:
-              #  print("Fallo en la comunicación")
+                cliente.cliente.close()
+              
+            except:
+                print("Fallo en la comunicación")
 
 if __name__ == "__main__":
     import sys
