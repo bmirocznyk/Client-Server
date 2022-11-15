@@ -6,7 +6,7 @@ Dependencias adicionales: PyQT5.<br />
 Instrucciones:<br />
   1)Se deben ejecutar el archivo server_gui.py<br />
   2)Ejecutar el archivo client_gui.py<br />
-  3)Escribir numero de puerto en el servidor<br />
+  3)Escribir número de puerto en el servidor<br />
   4)Hacer clic en "Conectar"<br />
   5)En el archivo client_gui escribir la dirección IP que figura en el servidor.<br />
   6)Escribir el mismo número de puerto que el servidor.<br />
