@@ -15,9 +15,10 @@ class Client:
         self.cliente=cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         adress = (ip,int(port))
         self.cliente.connect(adress)
-        print(self.getServerMessage())
+        
         self.cFilePath=filePath
     
+
 
 
     def getServerMessage(self):
@@ -28,24 +29,16 @@ class Client:
     def sendFileName(self):
         fileName = basename(self.cFilePath)
         self.cliente.send(fileName.encode(FORMAT))
-    
+        return (f"Cliente: Enviando el nombre de archivo {fileName}")
+
     def sendFileData(self):
         file = open(self.cFilePath)
         data = file.read()
         self.cliente.send(data.encode(FORMAT))
+        fileName = basename(self.cFilePath)
+        return (f"Cliente: Enviando datos del archivo de archivo {fileName}")
     
-        
-        
-
-    def sendFileFlow(self):
-        print("Sending file data")
-        self.sendFileName()
-        print(self.getServerMessage())
-        self.sendFileData()
-        print(self.getServerMessage())
-        print("termino")
-        self.cliente.close()
-        
+  
      
     
             

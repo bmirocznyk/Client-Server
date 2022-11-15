@@ -29,28 +29,27 @@ class Servidor:
         with open(fileName, 'w') as file:    
                 file.write(data)
                 file.close
-        print(f"Se recibió el archivo{fileName} correctamente")
 
 
     def acceptMessageFlow(self,connection):
         fileName = connection.recv(SIZE).decode(FORMAT)
         if(self.hasClientCancelled(fileName)):
                 print("El cliente no encotró el archivo y canceló la conexión")
-                connection.send("Hasta la proxima, esperamos que encuentre el archivo".encode())
+                connection.send("Servidor: Hasta la proxima, esperamos que encuentre el archivo".encode())
         else:
             if(self.acceptFileConfirmation(fileName)):
                 self.recieveFile(fileName,connection)
-                connection.send(f"Muchas gracias por la transferencia de{fileName}".encode())
+                connection.send(f"Servidor: Muchas gracias por la transferencia de {fileName}".encode())
                 connection.close
             else:
-                connection.send(f"Decidimos rechazar el archivo{fileName}, disculpas".encode())
+                connection.send(f"Servidor: Decidimos rechazar el archivo {fileName}, disculpas".encode())
     
 
 
     def startConnection(self):
             while True:
                 connection,address =self.server.accept()
-                message = (f'Se conectó al adress:{address}')
+                message = (f'Servidor: Se conectó al adress:{address}')
                 connection.send(message.encode())
                 self.acceptMessageFlow(connection)
 
