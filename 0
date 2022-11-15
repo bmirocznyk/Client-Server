@@ -1,1 +1,0 @@
-Hola, quiero unirme al mejor servidor del mundooo!!!!
