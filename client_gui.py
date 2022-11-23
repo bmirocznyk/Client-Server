@@ -168,9 +168,9 @@ class Ui_MainWindow(QDialog):
                 ui.messagesBox.setPlainText(mensaje)
                 mensaje += cliente.sendFileData() + "\n"
                 ui.messagesBox.setPlainText(mensaje)
-                mensaje += cliente.getServerMessage() + "\n"
+              
+                mensaje += "Servidor: Fin de transacción"
                 ui.messagesBox.setPlainText(mensaje)
-                mensaje += "Fin de transacción"
                 cliente.cliente.close()
             #except:
               #  print("Fallo en la comunicación")
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     MainWindow.setWindowIcon(QIcon('C:/Users/Usuario/Pictures/clientIcon.png'))
     MainWindow.show()
     ui.portField.setText("8001")
-    ui.ipField.setText("10.0.2.15")
+    ui.ipField.setText("192.168.56.1")
     ui.connectButton.clicked.connect(ui.sendFile)
     sys.exit(app.exec_())
 
