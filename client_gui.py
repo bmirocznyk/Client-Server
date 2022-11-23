@@ -185,7 +185,7 @@ if __name__ == "__main__":
     MainWindow.setWindowIcon(QIcon('C:/Users/Usuario/Pictures/clientIcon.png'))
     MainWindow.show()
     ui.portField.setText("8001")
-    ui.ipField.setText("172.22.96.1")
+    ui.ipField.setText("10.0.2.15")
     ui.connectButton.clicked.connect(ui.sendFile)
     sys.exit(app.exec_())
 
